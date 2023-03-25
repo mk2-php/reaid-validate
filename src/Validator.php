@@ -1,6 +1,6 @@
 <?php
 
-namespace Reald\Validator;
+namespace Reald\Validate;
 
 use Reald\Core\CoreBlock;
 

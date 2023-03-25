@@ -1,20 +1,23 @@
 <?php
 
-namespace Reald\Validator;
+namespace Reald\Validate;
 
 require "Rules.php";
 
 trait ValidateTrait{
 
     public $rules = [];
+    private $_inputData;
 
     public function verify($inputData, $myRules = []){
+
+        $this->_inputData = $inputData;
 
         if(!$myRules){
             $myRules = $this->rules;
         }
 
-        $realdRules = new Rules($inputData);
+        $realdRules = new Rules($this, $inputData);
 
         $messages = [];
 
@@ -75,6 +78,17 @@ trait ValidateTrait{
         return $res;
     }
 
+    public function getInputValue($key = null){
+        
+        if($key){
+            if(!empty($this->_inputData[$key])){
+                return $this->_inputData[$key];
+            }    
+        }
+        else{
+            return $this->_inputData;
+        }
+    }
 }
 
 class ValidateResCollection{

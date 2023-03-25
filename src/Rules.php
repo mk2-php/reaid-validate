@@ -1,17 +1,18 @@
 <?php
 
-
-namespace Reald\Validator;
+namespace Reald\Validate;
 
 class Rules{
 
+	private $_context;
 	private $_post;
 
 	/**
 	 * __construct
 	 * @param $post
 	 */
-	public function __construct($post){
+	public function __construct(&$context, $post){
+		$this->_context = $context;
 		$this->_post = $post;
 	}
 
@@ -732,10 +733,15 @@ class Rules{
 	 * custom
 	 * 
 	 * @param String $value
-	 * @param function $callback
+	 * @param String $methodName
+	 * @param any $optionValue
 	 */
-	public function custom($value, $callback){
-		$juge = $callback($value);
-		return $juge;
+	public function custom($value, $methodName, $optionValue = null){
+		
+		if(!method_exists($this->_context, $methodName)){
+			return true;
+		}
+
+		return $this->_context->{$methodName}($value, $optionValue);
 	}
 }
