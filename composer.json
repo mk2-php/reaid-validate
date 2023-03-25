@@ -1,0 +1,18 @@
+{
+    "name":"reald/validate",
+    "description": "Next PHP Framework 'Reald' validate",
+	"type": "library",
+	"license": "MIT",
+	"authors": [{
+		"name": "Masato Nakatsuji"
+	}],
+	"keywords": ["PHP","Framework","reald"],
+	"require": {
+		"php": ">=7.0.0"
+	},
+    "autoload": {
+        "psr-4": {
+            "Reald\\Validate\\": "src/"
+        }
+    }
+}
