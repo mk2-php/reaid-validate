@@ -11,6 +11,13 @@ trait ValidateTrait{
 
     public function verify($inputData, $myRules = []){
 
+        if(gettype($inputData) == "object"){
+            $className = get_class($inputData);
+            if($className == "Reald\Core\RequestControl"){
+                $inputData = $inputData->all();
+            }
+        }
+
         $this->_inputData = $inputData;
 
         if(!$myRules){
