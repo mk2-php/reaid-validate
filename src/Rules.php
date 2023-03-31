@@ -65,23 +65,23 @@ class Rules{
 
 		$targetValue = $this->getValue($confirmedValue);
 
-		return $this->equal($value, [$targetValue]);
+		return $this->equal($value, $targetValue);
 	}
     
     /**
      * alphaNumric
 	 * 
      * @param String $value
-     * @param Array $params
+     * @param Array $parameters
      */
-    public function alphaNumeric($value, $params){
+    public function alphaNumeric($value, $parameters = null){
 
 		if(!isset($value)){
 			return true;
 		}
 
 		if($parameters){
-            foreach($params as $p_){
+            foreach($parameters as $p_){
 				$value = str_replace($p_,"",$value);
             }
 		}
@@ -99,16 +99,16 @@ class Rules{
      * numeric
 	 * 
      * @param String $value
-     * @param Array $params
+     * @param Array $parameters
      */
-    public function numeric($value,$params){
+    public function numeric($value, $parameters = null){
 
 		if(!isset($value)){
 			return true;
 		}
 
         if($parameters){
-            foreach($params as $p_){
+            foreach($parameters as $p_){
 				$value = str_replace($p_,"",$value);
             }
         }
