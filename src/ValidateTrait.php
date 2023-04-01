@@ -3,12 +3,34 @@
 namespace Reald\Validate;
 
 require "Rules.php";
+require "ValidateResCollection.php";
 
 trait ValidateTrait{
 
     public $rules = [];
+
+    public $multiMessageFlg = false;
+    
     private $_inputData;
 
+    /**
+     * __construct
+     * 
+     * @param Array $validateRules
+     */
+    public function __construct($validateRules = null){
+
+        if($validateRules){
+            $this->rules = $validateRules;
+        }
+    }
+
+    /**
+     * verify
+     * 
+     * @param Array/RequestControl $inputData
+     * @param Array $myRules
+     */
     public function verify($inputData, $myRules = []){
 
         if(gettype($inputData) == "object"){
@@ -30,7 +52,7 @@ trait ValidateTrait{
 
         foreach($myRules as $key => $rules){
 
-            if(empty($inputData[$key])){
+            if(!isset($inputData[$key])){
                 $inputData[$key] = null;
             }
 
@@ -76,6 +98,10 @@ trait ValidateTrait{
                         $message = $rule["message"];
                     }
                     $messages[$key][] = $message;
+
+                    if(!$this->multiMessageFlg){
+                        break;
+                    }
                 }
             }
         }
@@ -85,62 +111,38 @@ trait ValidateTrait{
         return $res;
     }
 
-    public function getInputValue($key = null){
-        
-        if($key){
-            if(!empty($this->_inputData[$key])){
-                return $this->_inputData[$key];
-            }    
+    /**
+     * merge
+     * 
+     * @param Validator $validator
+     */
+    public function merge($validator){
+
+        if(gettype($validator) == "object"){
+            if(!isset($validator->rules)){
+                return;
+            }
+            $addValidateRule = $validator->rules;
+        }
+        else if(is_array($validator)){
+            $addValidateRule = $validator;
         }
         else{
-            return $this->_inputData;
-        }
-    }
-}
-
-class ValidateResCollection{
-
-    private $_response;
-
-    public function __construct($response){
-        $this->_response = $response;
-    }
-
-    public function toJuge(){
-
-        if(count($this->_response)){
-            return false;
-        }
-
-        return true;
-    }
-
-    public function toArray(){
-        return $this->_response;
-    }
-
-    public function toString(){
-        $str = "";
-        
-        $ind = 0;
-        foreach($this->_response as $r_){
-            if($ind){
-                $str .= "\n";
-            }
-            $str .= join("\n", $r_);
-            $ind++;
-        }
-
-        return $str;
-    }
-
-    public function getMessage($key, $sepalate = "\n"){
-        if(!empty($this->_response[$key])){
             return;
         }
 
-        $message = $this->_response[$key];
+        foreach($addValidateRule as $key => $value){
 
-        return join($sepalate, $message);
+            if(empty($this->rules[$key])){
+                $this->rules[$key] = $value;
+            }
+            else{
+                foreach($value as $index => $v_){
+                    $this->rules[$key][] = $v_;
+                }
+            }
+        }
+
+        return $this;
     }
 }

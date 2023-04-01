@@ -48,7 +48,7 @@ class Rules{
             return true;
         }
 
-        if($value===0 || $value==="0"){
+        if($value === 0 || $value === "0"){
             return true;
         }
             
@@ -76,7 +76,7 @@ class Rules{
      */
     public function alphaNumeric($value, $parameters = null){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -103,7 +103,7 @@ class Rules{
      */
     public function numeric($value, $parameters = null){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -130,7 +130,7 @@ class Rules{
      */
     public function length($value, $length){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -149,7 +149,7 @@ class Rules{
      */
     public function minLength($value, $length){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -168,7 +168,7 @@ class Rules{
      */
     public function maxLength($value, $length){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -188,7 +188,7 @@ class Rules{
      */
     public function betweenLength($value, $begin, $end){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -210,7 +210,7 @@ class Rules{
      */
     public function value($value, $targetValue){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -229,7 +229,7 @@ class Rules{
      */
     public function minValue($value, $targetValue){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -248,7 +248,7 @@ class Rules{
      */
     public function maxValue($value, $targetValue){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -268,7 +268,7 @@ class Rules{
      */
     public function betweenValue($value, $begin, $end){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -290,7 +290,7 @@ class Rules{
 	 */
 	public function selectedCount($value, $count){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -309,7 +309,7 @@ class Rules{
 	 */
 	public function minSelectedCount($value, $count){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -328,7 +328,7 @@ class Rules{
 	 */
 	public function maxSelectedCount($value, $count){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -348,7 +348,7 @@ class Rules{
 	 */
 	public function betweenSelectedCount($value, $begin, $end){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -370,7 +370,7 @@ class Rules{
      */
     public function equal($value, $targetValue){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -392,7 +392,7 @@ class Rules{
      */
     public function like($value, $likeStr){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 		
@@ -411,7 +411,7 @@ class Rules{
      */
     public function any($value, $params){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
         }
 
@@ -431,7 +431,7 @@ class Rules{
      */
     public function date($value){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -450,7 +450,7 @@ class Rules{
      */
 	public function minDate($value, $targetDate){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -472,7 +472,7 @@ class Rules{
      */
 	public function maxDate($value, $targetDate){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -495,7 +495,7 @@ class Rules{
      */
 	public function betweenDate($value, $begin, $end){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -517,7 +517,7 @@ class Rules{
      */
 	public function isInt($value){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -535,7 +535,7 @@ class Rules{
      */
 	public function isBool($value,$parameters){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -553,7 +553,7 @@ class Rules{
      */
 	public function isEmail($value){
 
-		if($value == ""){
+		if($value == null){
 			return true;
 		}
 
@@ -575,7 +575,7 @@ class Rules{
      */
 	public function isTel($value,$parameters){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -597,7 +597,7 @@ class Rules{
      */
 	public function isIp($value){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -615,7 +615,7 @@ class Rules{
      */
 	public function isUrl($value){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -634,7 +634,7 @@ class Rules{
      */
 	public function Regex($value, $regex){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -652,7 +652,7 @@ class Rules{
      */
 	public function isZipJP($value){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -708,7 +708,7 @@ class Rules{
 	 */
 	public function AllowedBeforeToday($value){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
@@ -722,7 +722,7 @@ class Rules{
 	 */
 	public function AllowedAfterToday($value,$parameters){
 
-		if(!isset($value)){
+		if($value == null){
 			return true;
 		}
 
