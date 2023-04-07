@@ -20,7 +20,7 @@ class Rules{
      * required
      * @param string $field
      */
-    private function getValue($field){
+    public function getValue($field){
 
         $value = $this->_post;
 
@@ -738,10 +738,14 @@ class Rules{
 	 */
 	public function custom($value, $methodName, $optionValue = null){
 		
-		if(!method_exists($this->_context, $methodName)){
-			return true;
+		if(method_exists($this->_context, $methodName)){
+			return $this->_context->{$methodName}($value, $optionValue);
 		}
 
-		return $this->_context->{$methodName}($value, $optionValue);
+		if(!empty($this->_context->_custom[$methodName])){
+			return $this->_context->_custom[$methodName]($value, $optionValue, $this);
+		}
+
+		return true;
 	}
 }

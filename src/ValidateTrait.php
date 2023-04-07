@@ -13,6 +13,8 @@ trait ValidateTrait{
     
     private $_inputData;
 
+    public $_custom = [];
+
     /**
      * __construct
      * 
@@ -111,6 +113,11 @@ trait ValidateTrait{
         return $res;
     }
 
+    public function addCustom($name, $callback){
+        $this->_custom[$name] = $callback;
+        return $this;
+    }
+
     /**
      * merge
      * 
@@ -118,11 +125,16 @@ trait ValidateTrait{
      */
     public function merge($validator){
 
+        $addValidateRule = [];
+        $addValidateCustom = [];
+
         if(gettype($validator) == "object"){
-            if(!isset($validator->rules)){
-                return;
+            if(isset($validator->rules)){
+                $addValidateRule = $validator->rules;
             }
-            $addValidateRule = $validator->rules;
+            if(isset($validator->_custom)){
+                $addValidateCustom = $validator->_custom;
+            }
         }
         else if(is_array($validator)){
             $addValidateRule = $validator;
@@ -141,6 +153,10 @@ trait ValidateTrait{
                     $this->rules[$key][] = $v_;
                 }
             }
+        }
+
+        foreach($addValidateCustom as $key => $value){
+            $this->_custom[$key] = $value;
         }
 
         return $this;
